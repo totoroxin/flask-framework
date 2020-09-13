@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Toy application demoing useful tech.">
+    <meta name="author" content="@gotoariel">
+
+    <title>Graph of {{ticker}} Data</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://cdn.bokeh.org/bokeh/release/bokeh-1.2.0.min.css" type="text/css" />
+        
+
+
+    <style>
+    body {
+      padding-top: 70px;
+    }
+    </style>
+    {{ bokeh_script_line|safe }}
+        
+    {{ bokeh_script_bar|safe }}
+        
+    <script type="text/javascript" src="http://cdn.bokeh.org/bokeh/release/bokeh-1.2.0.min.js"></script>
+    </head>
+
+    
+    
+    <body>
+    <!-- navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-1">
+          <span class="sr-only">Toggle navigation</span>
+          </button>
+          <span class="navbar-brand">Ticker Lookup App</span>
+        </div>
+
+        <div class="collapse navbar-collapse" id="nav-1">
+          <ul class="nav navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/totoroxin/flask-framework">GitHub</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.thedataincubator.com/12day.html">12-day</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.google.com/finance?q=GOOG">Google Finance</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+        
+    <!--    
+    <p>Ticker: {{ ticker }} </p>
+    <p>Features: {{ features }} </p>
+    -->
+
+    <div class="container">
+      <div class="row">
+        <div class="bk-root">
+            {{ bokeh_div_line|safe }}
+            {{ bokeh_div_bar|safe }}
+        </div>
+      </div>
+    </div>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    </body>
+</html>
