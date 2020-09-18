@@ -3,3 +3,4 @@ requests==2.20.0
 flask
 bokeh==1.2.0
 alpha_vantage
+pandas
