@@ -111,6 +111,7 @@ def plot_stock_price_line(df, ticker, features):
     return p
 
 def plot_stock_price_bar(df, ticker, features):
+    df = df.sort_values(by=['Date'])
     stock = ColumnDataSource(df)
     
     p = figure(
