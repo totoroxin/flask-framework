@@ -19,7 +19,7 @@ app = Flask(__name__)
 app.vars = {}
 
 # Define constants
-W_PLOT = 1500
+W_PLOT = 900
 H_PLOT = 600
 TOOLS = 'pan,wheel_zoom,box_zoom,hover,reset,save'
 
