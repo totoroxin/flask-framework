@@ -88,6 +88,7 @@ def read_stock_price(ticker):
         '8. split coefficient': 'Coefficient'
     })
     data = data[data['Date'] > '2019-01-01']
+    data = data.sort_values(by=['Date']).reset_index(drop=True)
     return data
 
 def plot_stock_price_line(df, ticker, features):
@@ -111,7 +112,6 @@ def plot_stock_price_line(df, ticker, features):
     return p
 
 def plot_stock_price_bar(df, ticker, features):
-    df = df.sort_values(by=['Date'], ascending=False)
     stock = ColumnDataSource(df)
     
     p = figure(
@@ -124,11 +124,11 @@ def plot_stock_price_bar(df, ticker, features):
     )
     p.grid.grid_line_alpha = 0.3
 
-    inc = stock.data['Close'] > stock.data['Open']
+    inc = df['Close'] > stock.data['Open']
     dec = stock.data['Open'] > stock.data['Close']
     view_inc = CDSView(source=stock, filters=[BooleanFilter(inc)])
     view_dec = CDSView(source=stock, filters=[BooleanFilter(dec)])
-
+    
     p.segment(x0='index', x1='index', y0='Low', y1='High', color=RED, source=stock, view=view_inc)
     p.segment(x0='index', x1='index', y0='Low', y1='High', color=GREEN, source=stock, view=view_dec)
 
@@ -136,12 +136,14 @@ def plot_stock_price_bar(df, ticker, features):
            source=stock,view=view_inc, name="price")
     p.vbar(x='index', width=VBAR_WIDTH, top='Open', bottom='Close', fill_color=RED, line_color=RED,
            source=stock,view=view_dec, name="price")
-    
+
+
     # map dataframe indices to date strings and use as label overrides
     p.xaxis.major_label_overrides = {
         i+int(stock.data['index'][0]): date.strftime('%b %d') for i, date in enumerate(pd.to_datetime(stock.data["Date"]))
     }
     p.xaxis.bounds = (stock.data['index'][0], stock.data['index'][-1])
+
 
     # Add more ticks in the plot
     p.x_range.range_padding = 0.05
@@ -154,11 +156,11 @@ def plot_stock_price_bar(df, ticker, features):
     # Choose, which glyphs are active by glyph name
     price_hover.names = ['price']
     # Creating tooltips
-    price_hover.tooltips = [('Datetime', '@Date{%Y-%m-%d}'),
+    price_hover.tooltips = [('Datetime', '@Date{%F}'),
                             ('Open', '@Open{$0,0.00}'),
                             ('Close', '@Close{$0,0.00}'),
-                            ('Volume', '@Volume{($ 0.00 a)}')]
-    price_hover.formatters={'Date': 'datetime'}
+                            ('Volume', '@Volume{($0.00 a)}')]
+    price_hover.formatters={'@Date': 'datetime'}
 
     return p
 
