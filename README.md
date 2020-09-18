@@ -1,41 +1,14 @@
-# Flask on Heroku
+## TDI 12-day Program Milestone Project
 
-This project is intended to help you tie together some important concepts and
-technologies from the 12-day course, including Git, Flask, JSON, Pandas,
-Requests, Heroku, and Bokeh for visualization.
+This project involves the applications for **Git, Flask, Requests, Heroku, and Bokeh** for visualization, as well as other basic data processing libraries in python 3. 
 
-The repository contains a basic template for a Flask configuration that will
-work on Heroku.
+The repository was developed from a repository of thedataincubator/flask-framework, a basic template with the instructions for deploying flask app to Heroku. 
 
-A [finished example](https://lemurian.herokuapp.com) that demonstrates some basic functionality.
+Tha [finished demo app](https://lemurian.herokuapp.com) showed a web search for stock price lookup with a line chart and bar chart.
 
-## Step 1: Setup and deploy
-- Git clone the existing template repository.
-- `Procfile`, `requirements.txt`, `conda-requirements.txt`, and `runtime.txt`
-  contain some default settings.
-- There is some boilerplate HTML in `templates/`
-- Create Heroku application with `heroku create <app_name>` or leave blank to
-  auto-generate a name.
-- (Suggested) Use the [conda buildpack](https://github.com/thedataincubator/conda-buildpack).
-  If you choose not to, put all requirements into `requirements.txt`
 
-  `heroku config:add BUILDPACK_URL=https://github.com/thedataincubator/conda-buildpack.git#py3`
+#### Data source
 
-  The advantages of conda include easier virtual environment management and fast package installation from binaries (as compared to the compilation that pip-installed packages sometimes require).
-  One disadvantage is that binaries take up a lot of memory, and the slug pushed to Heroku is limited to 300 MB. Another note is that the conda buildpack is being deprecated in favor of a Docker solution (see [docker branch](https://github.com/thedataincubator/flask-framework/tree/docker) of this repo for an example).
-- Deploy to Heroku: `git push heroku master`
-- You should be able to see your site at `https://<app_name>.herokuapp.com`
-- A useful reference is the Heroku [quickstart guide](https://devcenter.heroku.com/articles/getting-started-with-python-o).
+[Alpha Vantage API](https://www.alphavantage.co/) provied free API with a key request. Alpha Vantage are grouped into four categories: (1) Time Series Stock APIs, (2) Fundamental Data, (3) Physical and Digital/Crypto Currencies (e.g., Bitcoin), and (4) Technical Indicators. The demo app adopted TIME_SERIES_DAILY_ADJUSTED API, it could returns daily time series (date, daily open, daily high, daily low, daily close, daily volume, daily adjusted close, and split/dividend events) of the global equity specified, covering 20+ years of historical data.
 
-## Step 2: Get data from API and put it in pandas
-- Use the `requests` library to grab some data from a public API. This will
-  often be in JSON format, in which case `simplejson` will be useful.
-- Build in some interactivity by having the user submit a form which determines which data is requested.
-- Create a `pandas` dataframe with the data.
-
-## Step 3: Use Bokeh to plot pandas data
-- Create a Bokeh plot from the dataframe.
-- Consult the Bokeh [documentation](http://bokeh.pydata.org/en/latest/docs/user_guide/embed.html)
-  and [examples](https://github.com/bokeh/bokeh/tree/master/examples/embed).
-- Make the plot visible on your website through embedded HTML or other methods - this is where Flask comes in to manage the interactivity and display the desired content.
-- Some good references for Flask: [This article](https://realpython.com/blog/python/python-web-applications-with-flask-part-i/), especially the links in "Starting off", and [this tutorial](https://github.com/bev-a-tron/MyFlaskTutorial).
+The demo app ranged the data from 2019 to current time for visualiaztion.
